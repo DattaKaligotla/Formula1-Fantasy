@@ -21,6 +21,7 @@ app.get("/", async (req, res) => {
   res.render("index");
 });
 
+
 // page
 app.get("/data-display", async (req, res) => {
   const users = await User.find({})
@@ -89,5 +90,5 @@ async function addUser() {
 
 // listening to application at http://localhost:3000/
 app.listen(PORT, () => {
-  console.log(`Hackathon Template listening at port: ${PORT}`);
+  console.log(`Server listening at port: ${PORT}`);
 });
