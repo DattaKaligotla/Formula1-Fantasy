@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <%- include('partials/header') %>
+</head>
+
+<body>
+    <%- include('partials/nav') %>
+
+    <h1>Create User</h1>
+
+    <form action="/createUser" method="post">
+
+        <fieldset>
+            <label for="nameP"><strong>Name: </strong></label>
+            <input type="text" name="nameP">
+
+            <label for="email"><strong>Email Address: </strong></label>
+            <input type="email" name="email">
+
+            <br>
+
+            </br>
+
+            <label for="team"><strong>Team: </strong></label>
+            <input type="text" name="team">
+        </fieldset>
+
+        <input type="reset">
+        <input type="submit">
+
+    </form>
+
+    <hr>
+
+</body>
+
+</html>
