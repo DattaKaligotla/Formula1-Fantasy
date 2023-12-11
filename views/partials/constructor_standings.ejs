@@ -1,0 +1,22 @@
+<div class="container mt-5">
+    <h2>Constructor Standings</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Constructor</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% standings.forEach(function(constructor) { %>
+                <tr>
+                    <td>
+                        <strong><%= constructor.ranking %>. <%= constructor.name %></strong><br>
+                        <small style="font-size: smaller;"><%= constructor.team %></small>
+                    </td>
+                    <td><%= constructor.points %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>

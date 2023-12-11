@@ -6,14 +6,17 @@
 <body>
     <%- include('partials/nav') %>
     
-    <div class="container container-fluid header-container">
+    <div class="container-fluid mt-5">
         <div class="row">
-            <div class="col text-center">
-                <h1>Welcome to Fantasy Formula 1</h1>
+            <div class="col-md-6">
+                <%- include('partials/driver_standings', { standings: driverStandings }) %>
+            </div>
+            <div class="col-md-6">
+                <%- include('partials/constructor_standings', { standings: constructorStandings }) %>
             </div>
         </div>
     </div>
     
     <%- include('partials/footer') %>
 </body>
-</html>
+</html> 

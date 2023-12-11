@@ -8,7 +8,8 @@
     "jquery": "^3.6.0",
     "jQuery": "^1.7.4",
     "mongodb": "^6.3.0",
-    "mongoose": "^6.2.8"
+    "mongoose": "^6.2.8",
+    "node-fetch": "2.7.0"
   },
   "scripts": {
     "start": "nodemon server.js"

@@ -5,6 +5,7 @@ const app = express();
 const PORT = 3000 || process.env.PORT;
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const bodyParser = require('body-parser');
+const fetch = require('node-fetch');
 
 // setting view engine to ejs
 app.set("view engine", "ejs");
@@ -49,11 +50,35 @@ run().catch(console.dir);
 
 // index page
 app.get("/", async (req, res) => {
-  //await addUser(); // Create new user on page render
-  res.render("index");
+    try {
+        // Fetch Driver Standings
+        const driverResponse = await fetch('http://ergast.com/api/f1/current/driverStandings.json');
+        const driverData = await driverResponse.json();
+        const driverStandings = driverData.MRData.StandingsTable.StandingsLists[0].DriverStandings.map(item => ({
+            ranking: item.position,
+            name: `${item.Driver.givenName} ${item.Driver.familyName}`,
+            team: item.Constructors[0].name,
+            points: item.points
+        }));
+
+        // Fetch Constructor Standings
+        const constructorResponse = await fetch('http://ergast.com/api/f1/current/constructorStandings.json');
+        const constructorData = await constructorResponse.json();
+        const constructorStandings = constructorData.MRData.StandingsTable.StandingsLists[0].ConstructorStandings.map(item => ({
+            ranking: item.position,
+            name: item.Constructor.name,
+            points: item.points
+        }));
+
+        // Render the page with both standings
+        res.render("index", { driverStandings: driverStandings, constructorStandings: constructorStandings });
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        res.status(500).render('error', { error: error }); // Render an error view or handle differently
+    }
 });
 
-
+// handle user details
 app.get("/addUser", (req, res) => {
   res.render("user.ejs");
 });
@@ -78,7 +103,6 @@ app.post("/createUser", async (req, res) => {
       await client.close();
   }
 });
-
 
 app.post("/getTeam", async (req, res) => {
   try {
@@ -111,6 +135,44 @@ app.post("/getTeam", async (req, res) => {
 app.get("/myTeam", async (req, res) => {
   res.render("my_team.ejs")
 });
+
+// Home page api calls
+app.get('/getDriverStandings', async (req, res) => {
+    try {
+        const response = await fetch('http://ergast.com/api/f1/current/driverStandings.json');
+        const data = await response.json();
+
+        const standings = data.MRData.StandingsTable.StandingsLists[0].DriverStandings.map(item => ({
+            ranking: item.position,
+            name: `${item.Driver.givenName} ${item.Driver.familyName}`,
+            team: item.Constructors[0].name,
+            points: item.points
+        }));
+
+        // Render the 'index' view and pass the standings data
+        res.render('index', { standings: standings });
+    } catch (error) {
+        res.status(500).render('error', { error: error });
+    }
+});
+
+app.get('/getConstructorStandings', async (req, res) => {
+    try {
+        const response = await fetch('http://ergast.com/api/f1/current/constructorStandings.json');
+        const data = await response.json();
+
+        const standings = data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings.map(item => ({
+            ranking: item.position,
+            name: item.Constructor.name,
+            points: item.points
+        }));
+
+        res.json(standings);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 
 // listening to application at http://localhost:3000/
 app.listen(PORT, () => {

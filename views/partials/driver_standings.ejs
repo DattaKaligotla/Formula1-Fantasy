@@ -1,0 +1,22 @@
+<div class="container mt-5">
+    <h2>Driver Standings</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Driver</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% standings.forEach(function(driver) { %>
+                <tr>
+                    <td>
+                        <strong><%= driver.ranking %>. <%= driver.name %></strong><br>
+                        <small style="font-size: smaller;"><%= driver.team %></small>
+                    </td>
+                    <td><%= driver.points %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
