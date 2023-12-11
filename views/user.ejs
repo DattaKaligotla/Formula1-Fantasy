@@ -7,29 +7,50 @@
 <body>
     <%- include('partials/nav') %>
 
-    <h1>Create User</h1>
+    <div class="container page-form">
+        <div class="row">
+          <div class="col-md-3">
+            
+          </div>
 
-    <form action="/createUser" method="post">
+          <div class="col-md-6">
+            <div class="col-12 text-center">
+                <h1>Create User</h1>
+            </div>
+        
+            <form action="/createUser" method="post" class="row">
+              <div class="col-12 text-center">
+                <input name="nameP" type="text" class="form-control" id="nameP" placeholder="name">
+              </div>
+              <div class="col-12 text-center">
+                <input name="email" type="email" class="form-control" id="email" placeholder="email">
+              </div>
+              <div class="col-12 text-center">
+            
+                <select name="team" id="id" value="" class="form-select" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="RedBull">Red Bull Racing</option>
+                    <option value="AstonMartin">Aston Martin Cognizant Formula One Team</option>
+                    <option value="Ferrari">Scuderia Ferrari</option>
+                    <option value="Mercedes">Mercedes-AMG Petronas Formula One Team</option>
+                    <option value="McLaren">McLaren F1 Team</option>
+                    <option value="Alpine">Alpine F1 Team</option>
+                    <option value="AlphaTauri">Scuderia AlphaTauri</option>
+                    <option value="AlfaRomeo">Alfa Romeo Racing Orlen</option>
+                    <option value="Haas">Haas F1 Team</option>
+                    <option value="Williams">Williams Racing</option>
+                </select>
+            
+              </div>
 
-        <fieldset>
-            <label for="nameP"><strong>Name: </strong></label>
-            <input type="text" name="nameP">
-
-            <label for="email"><strong>Email Address: </strong></label>
-            <input type="email" name="email">
-
-            <br>
-
-            </br>
-
-            <label for="team"><strong>Team: </strong></label>
-            <input type="text" name="team">
-        </fieldset>
-
-        <input type="reset">
-        <input type="submit">
-
-    </form>
+              <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary mt-3 mb-3">Submit</button>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-3"></div>
+        </div>
+      </div>
 
     <hr>
 
