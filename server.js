@@ -136,44 +136,6 @@ app.get("/myTeam", async (req, res) => {
   res.render("my_team.ejs")
 });
 
-// Home page api calls
-app.get('/getDriverStandings', async (req, res) => {
-    try {
-        const response = await fetch('http://ergast.com/api/f1/current/driverStandings.json');
-        const data = await response.json();
-
-        const standings = data.MRData.StandingsTable.StandingsLists[0].DriverStandings.map(item => ({
-            ranking: item.position,
-            name: `${item.Driver.givenName} ${item.Driver.familyName}`,
-            team: item.Constructors[0].name,
-            points: item.points
-        }));
-
-        // Render the 'index' view and pass the standings data
-        res.render('index', { standings: standings });
-    } catch (error) {
-        res.status(500).render('error', { error: error });
-    }
-});
-
-app.get('/getConstructorStandings', async (req, res) => {
-    try {
-        const response = await fetch('http://ergast.com/api/f1/current/constructorStandings.json');
-        const data = await response.json();
-
-        const standings = data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings.map(item => ({
-            ranking: item.position,
-            name: item.Constructor.name,
-            points: item.points
-        }));
-
-        res.json(standings);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
-
 // listening to application at http://localhost:3000/
 app.listen(PORT, () => {
   console.log(`Server listening at port: ${PORT}`);
