@@ -1,7 +1,7 @@
 # Formula1 Fantasy
 Amruth Nare (unare)
 Sanjit Thangarasu ()
-Datta Kaligotla ()
+Sreedatta Kaligotla (dattak) - 117113723
 
 ## Description
 
