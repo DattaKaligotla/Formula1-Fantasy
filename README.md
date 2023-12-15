@@ -1,6 +1,6 @@
 # Formula1 Fantasy
 Amruth Nare (unare)
-Sanjit Thangarasu ()
+Sanjit Thangarasu (sanjit13)
 Sreedatta Kaligotla (dattak) 
 
 ## Link To Site
